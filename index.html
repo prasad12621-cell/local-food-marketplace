@@ -1,0 +1,233 @@
+Content is user-generated and unverified.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmConnect - Local Food Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="logo">🌾 FarmConnect</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#marketplace" class="nav-link">Marketplace</a></li>
+                <li><a href="#farmers" class="nav-link">Our Farmers</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1 class="hero-title">Fresh From Farm to Your Table</h1>
+            <p class="hero-subtitle">Connect directly with local farmers. No middlemen, just fresh produce.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-large btn-primary" id="buyerSignup">I'm a Buyer</button>
+                <button class="btn btn-large btn-secondary" id="farmerSignup">I'm a Farmer</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h2>Find Local Produce</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for products, farmers, or locations...">
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="meat">Meat & Poultry</option>
+                    <option value="grains">Grains</option>
+                </select>
+                <button class="btn btn-primary" id="searchBtn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketplace Section -->
+    <section id="marketplace" class="marketplace">
+        <div class="container">
+            <h2>Available Products</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="vegetables">Vegetables</button>
+                <button class="filter-btn" data-filter="fruits">Fruits</button>
+                <button class="filter-btn" data-filter="dairy">Dairy</button>
+                <button class="filter-btn" data-filter="meat">Meat</button>
+            </div>
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+    </section>
+
+    <!-- Farmers Section -->
+    <section id="farmers" class="farmers-section">
+        <div class="container">
+            <h2>Meet Our Farmers</h2>
+            <div class="farmers-grid" id="farmersGrid"></div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h2>Find Farmers Near You</h2>
+            <div class="map-container">
+                <div id="farmersMap"></div>
+                <div class="map-sidebar">
+                    <h3>Delivery Zones</h3>
+                    <div id="deliveryZones"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>Why Choose FarmConnect?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Fresh & Local</h3>
+                    <p>Get the freshest produce directly from local farmers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Fair Prices</h3>
+                    <p>No middlemen means better prices for everyone</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Build Trust</h3>
+                    <p>Reviews and ratings create a trusted community</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Easy Ordering</h3>
+                    <p>Direct messaging and simple order management</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal: Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Signup -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign Up</h2>
+            <div class="signup-tabs">
+                <button class="tab-btn active" data-tab="buyer">Buyer</button>
+                <button class="tab-btn" data-tab="farmer">Farmer</button>
+            </div>
+            <form id="signupForm">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <input type="tel" placeholder="Phone Number" required>
+                <div id="farmerFields" style="display:none;">
+                    <input type="text" placeholder="Farm Name">
+                    <input type="text" placeholder="Farm Address">
+                    <textarea placeholder="Tell us about your farm"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Product Details -->
+    <div id="productModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <div id="productDetails"></div>
+        </div>
+    </div>
+
+    <!-- Modal: Farmer Profile -->
+    <div id="farmerModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <div id="farmerDetails"></div>
+        </div>
+    </div>
+
+    <!-- Modal: Messaging -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Send Message</h2>
+            <form id="messageForm">
+                <textarea placeholder="Type your message here..." rows="5" required></textarea>
+                <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            </form>
+            <div id="messageSuccess" class="success-message" style="display:none;">
+                Message sent successfully!
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🌾 FarmConnect</h3>
+                    <p>Connecting farmers and buyers for a sustainable future</p>
+                </div>
+                <div class="footer-section">
+                    <h4>For Buyers</h4>
+                    <ul>
+                        <li><a href="#">Browse Products</a></li>
+                        <li><a href="#">Find Farmers</a></li>
+                        <li><a href="#">Delivery Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Farmers</h4>
+                    <ul>
+                        <li><a href="#">Create Profile</a></li>
+                        <li><a href="#">Manage Inventory</a></li>
+                        <li><a href="#">Sales Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: hello@farmconnect.com</p>
+                    <p>Phone: (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
